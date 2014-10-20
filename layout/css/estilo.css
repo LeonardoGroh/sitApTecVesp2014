@@ -1,0 +1,12 @@
+@media screen and (orientation: portrait)/*Modo vertical*/
+{
+    .horizontal{display:none;}
+    .vertical{display:block;}
+               
+}
+@media screen and (orientation: landscape)/*Modo horizontal*/
+{
+    .horizontal{display:block;}
+    .vertical{display:none;}
+               
+}
