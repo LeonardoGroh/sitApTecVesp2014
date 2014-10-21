@@ -29,6 +29,7 @@ CREATE  TABLE IF NOT EXISTS `mydb`.`Artigo` (
   `idArtigo` INT NOT NULL AUTO_INCREMENT ,
   `titulo` VARCHAR(45) NOT NULL ,
   `login` VARCHAR(45) NOT NULL ,
+  `data` DATETIME NOT NULL ,
   PRIMARY KEY (`idArtigo`) ,
   INDEX `fk_Artigo_User` (`login` ASC) ,
   CONSTRAINT `fk_Artigo_User`
@@ -46,9 +47,9 @@ DROP TABLE IF EXISTS `mydb`.`coment` ;
 
 CREATE  TABLE IF NOT EXISTS `mydb`.`coment` (
   `login` VARCHAR(45) NOT NULL ,
-  `idArtigo` INT NOT NULL AUTO_INCREMENT ,
+  `idArtigo` INT NOT NULL ,
   `texto` TEXT NOT NULL ,
-  PRIMARY KEY (`idArtigo`, `login`) ,
+  `data` DATETIME NOT NULL ,
   INDEX `fk_User_has_Artigo_Artigo1` (`idArtigo` ASC) ,
   INDEX `fk_User_has_Artigo_User1` (`login` ASC) ,
   CONSTRAINT `fk_User_has_Artigo_User1`
@@ -91,7 +92,7 @@ DROP TABLE IF EXISTS `mydb`.`tags` ;
 CREATE  TABLE IF NOT EXISTS `mydb`.`tags` (
   `idtags` VARCHAR(20) NOT NULL ,
   `titulo` VARCHAR(45) NOT NULL ,
-  `descricao` VARCHAR(144) NULL ,
+  `descricao` VARCHAR(100) NULL ,
   PRIMARY KEY (`idtags`) )
 ENGINE = InnoDB;
 
