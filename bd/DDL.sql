@@ -2,15 +2,13 @@ SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL';
 
-CREATE SCHEMA IF NOT EXISTS `mydb` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci ;
-USE `mydb` ;
 
 -- -----------------------------------------------------
--- Table `mydb`.`User`
+-- Table `sitap`.`User`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mydb`.`User` ;
+DROP TABLE IF EXISTS `sitap`.`User` ;
 
-CREATE  TABLE IF NOT EXISTS `mydb`.`User` (
+CREATE  TABLE IF NOT EXISTS `sitap`.`User` (
   `login` VARCHAR(45) NOT NULL ,
   `nome` VARCHAR(45) NOT NULL ,
   `email` VARCHAR(100) NOT NULL ,
@@ -21,31 +19,33 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`Artigo`
+-- Table `sitap`.`Artigo`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mydb`.`Artigo` ;
+DROP TABLE IF EXISTS `sitap`.`Artigo` ;
 
-CREATE  TABLE IF NOT EXISTS `mydb`.`Artigo` (
+CREATE  TABLE IF NOT EXISTS `sitap`.`Artigo` (
   `idArtigo` INT NOT NULL AUTO_INCREMENT ,
   `titulo` VARCHAR(45) NOT NULL ,
   `login` VARCHAR(45) NOT NULL ,
   `data` DATETIME NOT NULL ,
+  `texto` TEXT NOT NULL ,
+  `like` INT NULL ,
   PRIMARY KEY (`idArtigo`) ,
   INDEX `fk_Artigo_User` (`login` ASC) ,
   CONSTRAINT `fk_Artigo_User`
     FOREIGN KEY (`login` )
-    REFERENCES `mydb`.`User` (`login` )
+    REFERENCES `sitap`.`User` (`login` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`coment`
+-- Table `sitap`.`coment`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mydb`.`coment` ;
+DROP TABLE IF EXISTS `sitap`.`coment` ;
 
-CREATE  TABLE IF NOT EXISTS `mydb`.`coment` (
+CREATE  TABLE IF NOT EXISTS `sitap`.`coment` (
   `login` VARCHAR(45) NOT NULL ,
   `idArtigo` INT NOT NULL ,
   `texto` TEXT NOT NULL ,
@@ -54,23 +54,23 @@ CREATE  TABLE IF NOT EXISTS `mydb`.`coment` (
   INDEX `fk_User_has_Artigo_User1` (`login` ASC) ,
   CONSTRAINT `fk_User_has_Artigo_User1`
     FOREIGN KEY (`login` )
-    REFERENCES `mydb`.`User` (`login` )
+    REFERENCES `sitap`.`User` (`login` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_User_has_Artigo_Artigo1`
     FOREIGN KEY (`idArtigo` )
-    REFERENCES `mydb`.`Artigo` (`idArtigo` )
+    REFERENCES `sitap`.`Artigo` (`idArtigo` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`Fotos`
+-- Table `sitap`.`Fotos`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mydb`.`Fotos` ;
+DROP TABLE IF EXISTS `sitap`.`Fotos` ;
 
-CREATE  TABLE IF NOT EXISTS `mydb`.`Fotos` (
+CREATE  TABLE IF NOT EXISTS `sitap`.`Fotos` (
   `idFotos` INT NOT NULL AUTO_INCREMENT ,
   `imagem` VARCHAR(45) NOT NULL ,
   `idArtigo` INT NOT NULL ,
@@ -78,18 +78,18 @@ CREATE  TABLE IF NOT EXISTS `mydb`.`Fotos` (
   INDEX `fk_fotos_Artigo1` (`idArtigo` ASC) ,
   CONSTRAINT `fk_fotos_Artigo1`
     FOREIGN KEY (`idArtigo` )
-    REFERENCES `mydb`.`Artigo` (`idArtigo` )
+    REFERENCES `sitap`.`Artigo` (`idArtigo` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`tags`
+-- Table `sitap`.`tags`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mydb`.`tags` ;
+DROP TABLE IF EXISTS `sitap`.`tags` ;
 
-CREATE  TABLE IF NOT EXISTS `mydb`.`tags` (
+CREATE  TABLE IF NOT EXISTS `sitap`.`tags` (
   `idtags` VARCHAR(20) NOT NULL ,
   `titulo` VARCHAR(45) NOT NULL ,
   `descricao` VARCHAR(100) NULL ,
@@ -98,11 +98,11 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`Artigo_has_tags`
+-- Table `sitap`.`Artigo_has_tags`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mydb`.`Artigo_has_tags` ;
+DROP TABLE IF EXISTS `sitap`.`Artigo_has_tags` ;
 
-CREATE  TABLE IF NOT EXISTS `mydb`.`Artigo_has_tags` (
+CREATE  TABLE IF NOT EXISTS `sitap`.`Artigo_has_tags` (
   `idArtigo` INT NOT NULL ,
   `idtags` VARCHAR(20) NOT NULL ,
   PRIMARY KEY (`idArtigo`, `idtags`) ,
@@ -110,12 +110,12 @@ CREATE  TABLE IF NOT EXISTS `mydb`.`Artigo_has_tags` (
   INDEX `fk_Artigo_has_tags_Artigo1` (`idArtigo` ASC) ,
   CONSTRAINT `fk_Artigo_has_tags_Artigo1`
     FOREIGN KEY (`idArtigo` )
-    REFERENCES `mydb`.`Artigo` (`idArtigo` )
+    REFERENCES `sitap`.`Artigo` (`idArtigo` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_Artigo_has_tags_tags1`
     FOREIGN KEY (`idtags` )
-    REFERENCES `mydb`.`tags` (`idtags` )
+    REFERENCES `sitap`.`tags` (`idtags` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
