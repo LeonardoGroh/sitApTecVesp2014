@@ -1,92 +1,63 @@
-SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
-SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
-SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL';
-
-CREATE SCHEMA IF NOT EXISTS `sitap` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci ;
-USE `sitap` ;
-
 -- -----------------------------------------------------
--- Table `sitap`.`User`
+-- Data for table `sitap`.`usuario`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `sitap`.`User` ;
-
-CREATE  TABLE IF NOT EXISTS `sitap`.`User` (
-  `login` VARCHAR(45) NOT NULL ,
-  `nome` VARCHAR(45) NOT NULL ,
-  `email` VARCHAR(100) NOT NULL ,
-  `senha` VARCHAR(45) NOT NULL ,
-  `imagem` VARCHAR(45) NOT NULL ,
-  PRIMARY KEY (`login`) )
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `sitap`.`Artigo`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `sitap`.`Artigo` ;
-
-CREATE  TABLE IF NOT EXISTS `sitap`.`Artigo` (
-  `idArtigo` INT NOT NULL AUTO_INCREMENT ,
-  `titulo` VARCHAR(45) NOT NULL ,
-  `login` VARCHAR(45) NOT NULL ,
-  `data` DATETIME NOT NULL ,
-
 START TRANSACTION;
 USE `sitap`;
-INSERT INTO `sitap`.`User` (`login`, `nome`, `email`, `senha`, `imagem`) VALUES ('Whory1987', 'Ana Oliveira Dias', 'AnaOliveiraDias@dayrep.com', 'teste', 'http://lorempixel.com/output/people-q-c-640-480-9.jpg');
-INSERT INTO `sitap`.`User` (`login`, `nome`, `email`, `senha`, `imagem`) VALUES ('Whitu1966', 'Felipe Castro Santos', 'FelipeCastroSantos@jourrapide.com', 'teste', 'http://lorempixel.com/output/people-q-c-640-480-8.jpg');
+INSERT INTO `sitap`.`usuario` (`idusuario`, `nome`, `email`, `senha`, `sexo`, `cidade`, `estado`, `endereco`, `cep`, `foto`) VALUES (2, 'Gilberson Silva dos Santos', 'gilber@hotmail.com', '1234', 'M', 'Brusque', 'SC', 'Rua do Gilberson, 47', '88356-890', 'http://lorempixel.com/output/people-q-c-330-330-3.jpg');
+INSERT INTO `sitap`.`usuario` (`idusuario`, `nome`, `email`, `senha`, `sexo`, `cidade`, `estado`, `endereco`, `cep`, `foto`) VALUES (0, 'Anônimo', 'anonimo@anonimo.com.br', NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `sitap`.`usuario` (`idusuario`, `nome`, `email`, `senha`, `sexo`, `cidade`, `estado`, `endereco`, `cep`, `foto`) VALUES (1, 'Admin', 'admin@admin.com.br', '1234', NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `sitap`.`usuario` (`idusuario`, `nome`, `email`, `senha`, `sexo`, `cidade`, `estado`, `endereco`, `cep`, `foto`) VALUES (3, 'Cacilda Paris Hilton', 'cacilda@gmail.com', '1234', 'F', 'Guabiruba', 'SC', 'Rua na Guabiruba, 74', '88301-805', 'http://lorempixel.com/output/people-q-c-330-330-9.jpg');
 
 COMMIT;
 
 -- -----------------------------------------------------
--- Data for table `sitap`.`Artigo`
+-- Data for table `sitap`.`artigo`
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `sitap`;
-INSERT INTO `sitap`.`Artigo` (`idArtigo`, `titulo`, `login`, `data`, `texto`, `like`) VALUES (1, 'Teste', 'Whitu1966', '2014-10-24 16:44:50', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>', 13);
-INSERT INTO `sitap`.`Artigo` (`idArtigo`, `titulo`, `login`, `data`, `texto`, `like`) VALUES (2, 'Teste02', 'Whory1987', '2014-10-27 16:44:50', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>', 50);
+INSERT INTO `sitap`.`artigo` (`idartigo`, `titulo`, `corpo`, `data`, `idusuario`, `like`) VALUES (1, 'A Pizza nossa de cada dia no dai hoje', '<p>Mussum ipsum cacilds, vidis litro abertis. Consetis adipiscings elitis. Pra lá , depois divoltis porris, paradis. Paisis, filhis, espiritis santis. Mé faiz elementum girarzis, nisi eros vermeio, in elementis mé pra quem é amistosis quis leo. Manduma pindureta quium dia nois paga. Sapien in monti palavris qui num significa nadis i pareci latim. Interessantiss quisso pudia ce receita de bolis, mais bolis eu num gostis.</p>', '2014-10-27 16:42:13', 2, 15);
+INSERT INTO `sitap`.`artigo` (`idartigo`, `titulo`, `corpo`, `data`, `idusuario`, `like`) VALUES (2, 'O bacon faz mal pro porco', '<p>Bacon ipsum dolor amet pork loin rump sausage kielbasa shank doner kevin spare ribs sirloin pork chop tenderloin corned beef ham hock tongue meatloaf. Corned beef cow brisket rump jerky t-bone. Ribeye brisket jowl, tri-tip frankfurter cow short ribs shank pork spare ribs venison flank ham salami. Boudin t-bone kielbasa flank strip steak.</p>', '2014-10-27 16:50:35', 3, 10);
 
 COMMIT;
 
 -- -----------------------------------------------------
--- Data for table `sitap`.`coment`
+-- Data for table `sitap`.`comentario`
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `sitap`;
-INSERT INTO `sitap`.`coment` (`login`, `idArtigo`, `texto`, `data`) VALUES ('Whory1987', 1, '<p>Blablabla</p>', '2014-10-27 16:50:59');
-INSERT INTO `sitap`.`coment` (`login`, `idArtigo`, `texto`, `data`) VALUES ('Whitu1966', 2, '<p>Mimimi</p>', '2014-10-27 16:50:59');
+INSERT INTO `sitap`.`comentario` (`idcomentario`, `idusuario`, `idartigo`, `corpo`, `data`) VALUES (1, 0, 1, 'Alo ha isso é um comentário do anônimo', '2014-10-27 16:48:15');
+INSERT INTO `sitap`.`comentario` (`idcomentario`, `idusuario`, `idartigo`, `corpo`, `data`) VALUES (2, 3, 1, 'Alo ha Cacilda aqui', '2014-10-28 8:56:15');
 
 COMMIT;
 
 -- -----------------------------------------------------
--- Data for table `sitap`.`Fotos`
+-- Data for table `sitap`.`foto`
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `sitap`;
-INSERT INTO `sitap`.`Fotos` (`idFotos`, `imagem`, `idArtigo`) VALUES (1, 'http://vidasustentavel.perus.com/img/latinha-ecologica.jpg', 1);
-INSERT INTO `sitap`.`Fotos` (`idFotos`, `imagem`, `idArtigo`) VALUES (2, 'http://www.camparigroup.com/sites/default/files/brand/skyy_vodka.png', 2);
+INSERT INTO `sitap`.`foto` (`idfoto`, `arquivo`, `idartigo`) VALUES (1, 'http://lorempizza.com/i/714/300', 1);
+INSERT INTO `sitap`.`foto` (`idfoto`, `arquivo`, `idartigo`) VALUES (2, 'http://lorempizza.com/i/514/300', 1);
+INSERT INTO `sitap`.`foto` (`idfoto`, `arquivo`, `idartigo`) VALUES (3, 'http://baconmockup.com/300/200', 2);
+INSERT INTO `sitap`.`foto` (`idfoto`, `arquivo`, `idartigo`) VALUES (4, 'http://baconmockup.com/714/300', 2);
 
 COMMIT;
 
 -- -----------------------------------------------------
--- Data for table `sitap`.`tags`
+-- Data for table `sitap`.`categoria`
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `sitap`;
-INSERT INTO `sitap`.`tags` (`idtags`, `titulo`, `descricao`) VALUES ('1', 'pizza', 'comida');
-INSERT INTO `sitap`.`tags` (`idtags`, `titulo`, `descricao`) VALUES ('0', 'refrigerante', 'bebida');
-INSERT INTO `sitap`.`tags` (`idtags`, `titulo`, `descricao`) VALUES ('2', 'jogos', 'é isso');
+INSERT INTO `sitap`.`categoria` (`idcategoria`, `nome`, `descricao`) VALUES (1, 'Pizza', 'Categora que fala sobre pizzas');
+INSERT INTO `sitap`.`categoria` (`idcategoria`, `nome`, `descricao`) VALUES (2, 'Bacon', 'Categoria sobre bacon');
 
 COMMIT;
 
 -- -----------------------------------------------------
--- Data for table `sitap`.`Artigo_has_tags`
+-- Data for table `sitap`.`categoria_has_artigo`
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `sitap`;
-INSERT INTO `sitap`.`Artigo_has_tags` (`idArtigo`, `idtags`) VALUES (1, '1');
-INSERT INTO `sitap`.`Artigo_has_tags` (`idArtigo`, `idtags`) VALUES (1, '2');
-INSERT INTO `sitap`.`Artigo_has_tags` (`idArtigo`, `idtags`) VALUES (2, '1');
-INSERT INTO `sitap`.`Artigo_has_tags` (`idArtigo`, `idtags`) VALUES (2, '2');
+INSERT INTO `sitap`.`categoria_has_artigo` (`idcategoria`, `idartigo`) VALUES (1, 1);
+INSERT INTO `sitap`.`categoria_has_artigo` (`idcategoria`, `idartigo`) VALUES (2, 2);
 
 COMMIT;
