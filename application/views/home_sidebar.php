@@ -10,7 +10,7 @@
             <li class="current"><a href="#">Latest Post</a></li>
             <li><a href="<?php echo base_url('usuarios'); ?>">Cadastro de Usuário</a></li>
             <li><a href="<?php echo base_url('login'); ?>">LOGIN</a></li>
-            <li><a href="#">Contact Me</a></li>
+            <li><a href="<?php echo base_url('noticias'); ?>">Cadasrto de noticia</a></li>
         </ul>
     </nav>
 
