@@ -42,15 +42,15 @@
             <?php echo form_open('login', 'id="form-login"'); ?>
 
           
-            <label for="email">E-mail:</label><br/>
-            <input type="text" name="email" value="<?php echo set_value('email'); ?>"/>
-            <div class="error"><?php echo form_error('email'); ?></div>
+            <label for="titulo">E-mail:</label><br/>
+            <input type="text" name="titulo" value="<?php echo set_value('titulo'); ?>"/>
+            <div class="error"><?php echo form_error('titulo'); ?></div>
 
-            <label for="senha">Senha:</label><br/>
-            <input type="password" name="senha" value="<?php echo set_value('senha'); ?>"/>
-            <div class="error"><?php echo form_error('senha'); ?></div>
+            <label for="senha">Corpo:</label><br/>
+            <input type="text" name="corpo" value="<?php echo set_value('corpo'); ?>"/>
+            <div class="error"><?php echo form_error('corpo'); ?></div>
 
-            <input type="submit" name="login" value="Login" />
+            <input type="submit" name="cadastrar" value="Cadastrar" />
 
             <?php echo form_close(); ?>
 
